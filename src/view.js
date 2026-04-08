@@ -7,15 +7,20 @@ import { requestAPI } from "./data";
 export const createCards = (result) => {
   const section = document.querySelector(".card-toilets");
   //création nouvel élement
+  //création numero de carte
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
+
+  const num = String(result.gid).padStart(3, "0");
+
   cards.innerHTML = `
-    <h3>Toilette : "${result.nom ?? "Nom inconnue"}"</h3>
-    <p>${result.commune ?? "Commune non renseignée"}</p>
-    <p>apparait dans le quartier : ${result.quartier ?? "Pas renseigné"}
+      <span class="card-num">n°${num}</span>
+    <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
+    <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}
   `;
   section.appendChild(cards);
 };
+
 /**
  * récupérer les données toilette publics
  * crée card qui affiche les commune et le quartier
