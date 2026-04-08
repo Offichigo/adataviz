@@ -1,3 +1,5 @@
 import "./style.css";
 import { requestAPI } from "./data";
-const data = await requestAPI();
+import { extractCitiesFromData } from "./view";
+// const data = await requestAPI();
+extractCitiesFromData();

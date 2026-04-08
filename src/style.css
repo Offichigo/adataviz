@@ -1,5 +1,5 @@
 :root {
-  --color-bg: #d2b355;
+  --color-bg: #f9e6ad;
   --color-surface: #ffffff;
   --color-border: #ffe0a0;
   --color-text: #7a4f00;
@@ -22,4 +22,22 @@ body {
   background: var(--color-bg);
   color: var(--color-text);
   padding: 2rem 1.5rem;
+}
+
+.card-toilets {
+}
+
+#search {
+  border-radius: solid 2px;
+  border-color: rgb(0, 60, 255);
+  margin: 1rem;
+}
+.card-toilet {
+  border: 1px solid #020658;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  transition:
+    box-shadow 0.2s,
+    transform 0.2s;
 }
