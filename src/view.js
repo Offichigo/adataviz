@@ -4,6 +4,15 @@ import { requestAPI } from "./data";
  * @param {object} result toilette
  */
 //**transformation
+// en fonction du type de wc et si d’equipement specifique ajout d’une evolution
+//     - type_wc :
+//         - cabine automatique : ténèbres/spectre
+//         - mobilier : type eau
+//         - bâtiment : type eau
+//     - type-equipement_urinoir : evolution ajout type:  poison
+//     - type-equipement turque: evolution ajout type: combat
+//     - type-equipement table à langer : evolution ajout type: fée
+//
 const getTypes = (result) => {
   const types = [];
   if (result.type_wc === "Cabine automatique") types.push("Ténèbre", "Spectre");
@@ -12,21 +21,14 @@ const getTypes = (result) => {
   if (result.equipement_urinoir >= 1) types.push("Poison");
   if (result.equipement_table_langer === 1) types.push("Fée");
   return types;
-
-  // en fonction du type de wc et si d’equipement specifique ajout d’une evolution
-  //     - type_wc :
-  //         - cabine automatique : ténèbres/spectre
-  //         - mobilier : type eau
-  //         - bâtiment : type eau
-  //     - type-equipement_urinoir : evolution ajout type:  poison
-  //     - type-equipement turque: evolution ajout type: combat
-  //     - type-equipement table à langer : evolution ajout type: fée
-  //
-};
-const getsprite = (type) => {
-  //ajout visuel selon type wc
 };
 
+const getSprite = (types) => {
+  if (types === "Poison")
+    "./public/icon-type-WCdex/120px-Miniature_Type_Poison_EV.png";
+};
+
+//**Création de cartes */
 export const createCards = (result) => {
   const section = document.querySelector(".card-toilets");
   //création nouvel élement
@@ -35,12 +37,14 @@ export const createCards = (result) => {
   cards.classList.add("card-toilet");
   const num = String(result.gid).padStart(3, "0");
   const types = getTypes(result);
+  const spriteTypes = getSprite(result);
 
   cards.innerHTML = `
       <span class="card-num">n°${num}</span>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
     <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
-    <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p>   
+    <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p> 
+    <img src="${spriteTypes}">
     <button class="btn-details">Voir plus</button>
   `;
   cards.querySelector(".btn-details").addEventListener("click", () => {
@@ -55,12 +59,13 @@ const openDetails = (result) => {
 
   const section = document.querySelector(".card-toilets");
   const cardsDetails = document.createElement("div");
-  cardsDetails.classList.add("card-toilet-details");
+  cardsDetails.classList.add("card-toilets-details");
 
   const num = String(result.gid).padStart(3, "0");
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
-  //etat ajout visuel tempérament fermé dead
+
+  //etat ajout visuel fermé dead
   //gender?
   //
   // ajout boolean pmr */
@@ -77,10 +82,10 @@ const openDetails = (result) => {
     <li>${result.horaire_ouverture ?? "Pas plus d'informations"}</li>
     <li>${result.jour_ouverture ?? "Pas plus d'informations"}</li>
     <li>Type de wc : ${result.type_wc ?? "Pas plus d'informations"}</li>  
-    <li>Equipement table à langer : ${result.equipement_table_langer ?? "Pas plus d'informations"}</li>
+    <li>Equipement Table à langer : ${result.equipement_table_langer === 1 ? "✓" : "✗"}</li>
     <li>Equipement urinoir : ${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
-    <button class="btn-close-details">Fermer</button>
     </ul>
+       <button class="btn-close-details">Fermer</button>
   `;
   cardsDetails
     .querySelector(".btn-close-details")
