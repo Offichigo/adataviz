@@ -23,34 +23,74 @@ const getTypes = (result) => {
   return types;
 };
 
-const getSprite = (types) => {
-  if (types === "Poison")
-    "./public/icon-type-WCdex/120px-Miniature_Type_Poison_EV.png";
+const getSprite = (types, num) => {
+  const card = document.getElementById(num);
+  console.log(card);
+  types.forEach((type) => {
+    addSprite(type, card);
+  });
+};
+const addSprite = (type, card) => {
+  const imgTypes = document.createElement("img");
+
+  switch (type) {
+    case "Poison":
+      imgTypes.setAttribute(
+        "src",
+        "./public/icon-type-WCdex/120px-Miniature_Type_Poison_EV.png",
+      );
+      break;
+    case "Eau":
+      imgTypes.setAttribute(
+        "src",
+        "./public/icon-type-WCdex/120px-Miniature_Type_Eau_EV.png",
+      );
+      break;
+    case "Ténèbre":
+      imgTypes.setAttribute(
+        "src",
+        "./public/icon-type-WCdex/120px-Miniature_Type_Ténèbres_EV.png",
+      );
+      break;
+    case "Spectre":
+      imgTypes.setAttribute(
+        "src",
+        "./public/icon-type-WCdex/120px-Miniature_Type_Spectre_EV.png",
+      );
+      break;
+    case "Fée":
+      imgTypes.setAttribute(
+        "src",
+        "./public/icon-type-WCdex/120px-Miniature_Type_Fée_EV.png",
+      );
+      break;
+  }
+  card.appendChild(imgTypes);
 };
 
 //**Création de cartes */
 export const createCards = (result) => {
+  const num = String(result.gid).padStart(3, "0");
+  const types = getTypes(result);
   const section = document.querySelector(".card-toilets");
   //création nouvel élement
   //création numero de carte
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
-  const num = String(result.gid).padStart(3, "0");
-  const types = getTypes(result);
-  const spriteTypes = getSprite(result);
+  cards.setAttribute("id", num);
 
   cards.innerHTML = `
       <span class="card-num">n°${num}</span>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
     <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
     <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p> 
-    <img src="${spriteTypes}">
     <button class="btn-details">Voir plus</button>
   `;
   cards.querySelector(".btn-details").addEventListener("click", () => {
     openDetails(result);
   });
   section.appendChild(cards);
+  getSprite(types, num);
 };
 
 const openDetails = (result) => {
@@ -85,7 +125,7 @@ const openDetails = (result) => {
     <li>Equipement Table à langer : ${result.equipement_table_langer === 1 ? "✓" : "✗"}</li>
     <li>Equipement urinoir : ${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
     </ul>
-       <button class="btn-close-details">Fermer</button>
+       <button class="btn-close-details">Voir moins</button>
   `;
   cardsDetails
     .querySelector(".btn-close-details")
