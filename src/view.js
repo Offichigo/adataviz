@@ -5,6 +5,14 @@ import { requestAPI } from "./data";
  */
 //**transformation
 const getTypes = (result) => {
+  const types = [];
+  if (result.type_wc === "Cabine automatique") types.push("Ténèbre", "Spectre");
+  else if (result.type_wc === "Mobilier" || result.type_wc === "Bâtiment")
+    types.push("Eau");
+  if (result.equipement_urinoir >= 1) types.push("Poison");
+  if (result.equipement_table_langer === 1) types.push("Fée");
+  return types;
+
   // en fonction du type de wc et si d’equipement specifique ajout d’une evolution
   //     - type_wc :
   //         - cabine automatique : ténèbres/spectre
@@ -26,12 +34,14 @@ export const createCards = (result) => {
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
   const num = String(result.gid).padStart(3, "0");
+  const types = getTypes(result);
 
   cards.innerHTML = `
       <span class="card-num">n°${num}</span>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
-    <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}
-     <button class="btn-details">Voir plus</button>
+    <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
+    <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p>   
+    <button class="btn-details">Voir plus</button>
   `;
   cards.querySelector(".btn-details").addEventListener("click", () => {
     openDetails(result);
@@ -48,19 +58,25 @@ const openDetails = (result) => {
   cardsDetails.classList.add("card-toilet-details");
 
   const num = String(result.gid).padStart(3, "0");
-  const pmr = result.accessibilite_pmr === "oui" ? "✓" : "✗";
+  const types = getTypes(result);
+  const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
+  //etat ajout visuel tempérament fermé dead
+  //gender?
+  //
   // ajout boolean pmr */
   cardsDetails.innerHTML = `
         <span class="card-num">n°${num}</span>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
     <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
+    <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p>   
     <ul>
     <li>${result.pole ?? "Pôle inconnue"}</li>
     <li>${result.configuration_wc ?? "Configuration wc inconnue"}</li>
     <li>Accessibilité PMR : ${pmr}</li>
     <li>${result.etat ?? "Pas plus d'informations"}</li>
     <li>${result.horaire_ouverture ?? "Pas plus d'informations"}</li>
-    <li>${result.ouverture ?? "Pas plus d'informations"}</li>
+    <li>${result.jour_ouverture ?? "Pas plus d'informations"}</li>
+    <li>Type de wc : ${result.type_wc ?? "Pas plus d'informations"}</li>  
     <li>Equipement table à langer : ${result.equipement_table_langer ?? "Pas plus d'informations"}</li>
     <li>Equipement urinoir : ${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
     <button class="btn-close-details">Fermer</button>
