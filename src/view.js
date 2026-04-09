@@ -4,7 +4,21 @@ import { requestAPI } from "./data";
  * @param {object} result toilette
  */
 //**transformation
-// ajout boolean pmr */
+const getTypes = (result) => {
+  // en fonction du type de wc et si d’equipement specifique ajout d’une evolution
+  //     - type_wc :
+  //         - cabine automatique : ténèbres/spectre
+  //         - mobilier : type eau
+  //         - bâtiment : type eau
+  //     - type-equipement_urinoir : evolution ajout type:  poison
+  //     - type-equipement turque: evolution ajout type: combat
+  //     - type-equipement table à langer : evolution ajout type: fée
+  //
+};
+const getsprite = (type) => {
+  //ajout visuel selon type wc
+};
+
 export const createCards = (result) => {
   const section = document.querySelector(".card-toilets");
   //création nouvel élement
@@ -17,33 +31,46 @@ export const createCards = (result) => {
       <span class="card-num">n°${num}</span>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
     <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}
+     <button class="btn-details">Voir plus</button>
   `;
+  cards.querySelector(".btn-details").addEventListener("click", () => {
+    openDetails(result);
+  });
   section.appendChild(cards);
 };
 
-export const createCardsDetails = (result) => {
+const openDetails = (result) => {
+  const existing = document.querySelector(".card-toilets-details");
+  if (existing) existing.remove();
+
   const section = document.querySelector(".card-toilets");
   const cardsDetails = document.createElement("div");
-  cards.classList.add("card-toilet-details");
-  const num = String(result.gid).padStart(3, "0");
+  cardsDetails.classList.add("card-toilet-details");
 
+  const num = String(result.gid).padStart(3, "0");
+  const pmr = result.accessibilite_pmr === "oui" ? "✓" : "✗";
+  // ajout boolean pmr */
   cardsDetails.innerHTML = `
         <span class="card-num">n°${num}</span>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
-    <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}
+    <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
     <ul>
     <li>${result.pole ?? "Pôle inconnue"}</li>
     <li>${result.configuration_wc ?? "Configuration wc inconnue"}</li>
-    <li>${result.accessibilite_pmr ?? "✗"}</li>
+    <li>Accessibilité PMR : ${pmr}</li>
     <li>${result.etat ?? "Pas plus d'informations"}</li>
     <li>${result.horaire_ouverture ?? "Pas plus d'informations"}</li>
     <li>${result.ouverture ?? "Pas plus d'informations"}</li>
-    <li>${result.equipement_table_langer ?? "Pas plus d'informations"}</li>
-    <li>${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
-    <li>${result.geo_point_2d ?? "Pas plus d'informations"}</li>
-
-    }
+    <li>Equipement table à langer : ${result.equipement_table_langer ?? "Pas plus d'informations"}</li>
+    <li>Equipement urinoir : ${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
+    <button class="btn-close-details">Fermer</button>
+    </ul>
   `;
+  cardsDetails
+    .querySelector(".btn-close-details")
+    .addEventListener("click", () => {
+      cardsDetails.remove();
+    });
   section.appendChild(cardsDetails);
 };
 
