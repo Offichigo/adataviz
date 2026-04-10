@@ -1,13 +1,10 @@
 :root {
-  --color-bg: #f9e6ad;
+  --color-bg: #441b1b;
   --color-surface: #ffffff;
-  --color-border: #ffe0a0;
-  --color-text: #7a4f00;
+  --color-border: #ffffff;
+  --color-text: #ffffff;
   --color-text-heading: #c05e00;
 
-  --radius-pill: 999px;
-  --radius-card: 16px;
-  --radius-item: 12px;
   --font: "Nunito", system-ui, sans-serif;
 }
 
@@ -24,18 +21,38 @@ body {
   padding: 2rem 1.5rem;
 }
 
-/* .card-toilets {
-} */
+.card-toilets {
+  display: flex;
+  flex-wrap: wrap;
+  border: solid 2px;
+}
 
 #search {
   border-radius: solid 2px;
-  border-color: rgb(0, 60, 255);
+  border-color: rgb(255, 0, 0);
   margin: 1rem;
 }
 .card-toilet {
-  border: 1px solid #020658;
-  border-radius: 12px;
+  height: 40rem;
+  width: 40rem;
+  border: 3px solid #ff0101;
+  border-radius: 25px;
   padding: 1rem;
-  cursor: pointer;
   margin: 1rem;
+}
+img {
+  width: 5rem;
+  margin: 0.2rem;
+}
+button {
+  cursor: pointer;
+}
+.card-details.hidden {
+  display: none;
+}
+
+.card-details {
+  margin-top: 12px;
+  border-top: 1px solid #ccc;
+  padding-top: 8px;
 }

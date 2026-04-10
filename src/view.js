@@ -18,6 +18,7 @@ const getTypes = (result) => {
   if (result.type_wc === "Cabine automatique") types.push("Ténèbre", "Spectre");
   else if (result.type_wc === "Mobilier" || result.type_wc === "Bâtiment")
     types.push("Eau");
+  //evolution pokemon
   if (result.equipement_urinoir >= 1) types.push("Poison");
   if (result.equipement_table_langer === 1) types.push("Fée");
   return types;
@@ -44,24 +45,32 @@ const addSprite = (type, card) => {
       imgTypes.setAttribute(
         "src",
         "./public/icon-type-WCdex/120px-Miniature_Type_Eau_EV.png",
+        "alt",
+        "icone type de pokemon Eau",
       );
       break;
     case "Ténèbre":
       imgTypes.setAttribute(
         "src",
         "./public/icon-type-WCdex/120px-Miniature_Type_Ténèbres_EV.png",
+        "alt",
+        "icone type de pokemon Ténèbre",
       );
       break;
     case "Spectre":
       imgTypes.setAttribute(
         "src",
         "./public/icon-type-WCdex/120px-Miniature_Type_Spectre_EV.png",
+        "alt",
+        "icone type de pokemon Spectre",
       );
       break;
     case "Fée":
       imgTypes.setAttribute(
         "src",
         "./public/icon-type-WCdex/120px-Miniature_Type_Fée_EV.png",
+        "alt",
+        "icone type de pokemon Fée",
       );
       break;
   }
@@ -70,50 +79,24 @@ const addSprite = (type, card) => {
 
 //**Création de cartes */
 export const createCards = (result) => {
-  const num = String(result.gid).padStart(3, "0");
-  const types = getTypes(result);
   const section = document.querySelector(".card-toilets");
   //création nouvel élement
   //création numero de carte
+  const num = String(result.gid).padStart(3, "0");
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
   cards.setAttribute("id", num);
+
+  const types = getTypes(result);
+  const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
 
   cards.innerHTML = `
       <span class="card-num">n°${num}</span>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
     <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
     <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p> 
-    <button class="btn-details">Voir plus</button>
-  `;
-  cards.querySelector(".btn-details").addEventListener("click", () => {
-    openDetails(result);
-  });
-  section.appendChild(cards);
-  getSprite(types, num);
-};
 
-const openDetails = (result) => {
-  const existing = document.querySelector(".card-toilets-details");
-  if (existing) existing.remove();
-
-  const section = document.querySelector(".card-toilets");
-  const cardsDetails = document.createElement("div");
-  cardsDetails.classList.add("card-toilets-details");
-
-  const num = String(result.gid).padStart(3, "0");
-  const types = getTypes(result);
-  const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
-
-  //etat ajout visuel fermé dead
-  //gender?
-  //
-  // ajout boolean pmr */
-  cardsDetails.innerHTML = `
-        <span class="card-num">n°${num}</span>
-    <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
-    <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
-    <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p>   
+      <div class="card-details hidden"> 
     <ul>
     <li>${result.pole ?? "Pôle inconnue"}</li>
     <li>${result.configuration_wc ?? "Configuration wc inconnue"}</li>
@@ -125,19 +108,25 @@ const openDetails = (result) => {
     <li>Equipement Table à langer : ${result.equipement_table_langer === 1 ? "✓" : "✗"}</li>
     <li>Equipement urinoir : ${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
     </ul>
-       <button class="btn-close-details">Voir moins</button>
-  `;
-  cardsDetails
-    .querySelector(".btn-close-details")
-    .addEventListener("click", () => {
-      cardsDetails.remove();
-    });
-  section.appendChild(cardsDetails);
+      </div>
+       <button class="btn-details">Voir plus</button> `;
+
+  cards.querySelector(".btn-details").addEventListener("click", () => {
+    const details = cards.querySelector(".card-details");
+    const btn = cards.querySelector(".btn-details");
+
+    details.classList.toggle("hidden");
+    btn.textContent = details.classList.contains("hidden")
+      ? "Voir plus"
+      : "Voir moins";
+  });
+
+  section.appendChild(cards);
+  getSprite(types, num);
 };
 
 /**
  * * ecoute du clique
- * ajout carte detaillé
  * ajout au clique changement de la carte
  * crée card qui affiche tous les autres détail et fait une comparaison et donne le type en fonction du type de wc et de son equipement
  *  clique affiche les détails pour chaque card pour en savoir plus
