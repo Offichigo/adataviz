@@ -83,15 +83,20 @@ export const createCards = (result) => {
   //création nouvel élement
   //création numero de carte
   const num = String(result.gid).padStart(3, "0");
+  const img = document.createElement("img");
+  img.src = `./public/card-img/${num}.png`;
+  img.classList.add("card-image");
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
   cards.setAttribute("id", num);
 
+  //ajout image de remplacement si error ?
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
 
   cards.innerHTML = `
       <span class="card-num">n°${num}</span>
+      <div class="card-sprite"></div>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
     <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
     <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p> 
@@ -110,6 +115,7 @@ export const createCards = (result) => {
     </ul>
       </div>
        <button class="btn-details">Voir plus</button> `;
+  cards.querySelector(".card-sprite").appendChild(img);
 
   cards.querySelector(".btn-details").addEventListener("click", () => {
     const details = cards.querySelector(".card-details");
@@ -120,7 +126,6 @@ export const createCards = (result) => {
       ? "Voir plus"
       : "Voir moins";
   });
-
   section.appendChild(cards);
   getSprite(types, num);
 };
