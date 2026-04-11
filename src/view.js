@@ -93,7 +93,12 @@ export const createCards = (result) => {
   //ajout image de remplacement si error ?
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
-
+  const etat =
+    result.etat === "En service"
+      ? "❤️"
+      : result.etat === "Hors service"
+        ? "💀"
+        : "🛠️";
   cards.innerHTML = `
       <span class="card-num">n°${num}</span>
       <div class="card-sprite"></div>
@@ -106,7 +111,7 @@ export const createCards = (result) => {
     <li>${result.pole ?? "Pôle inconnue"}</li>
     <li>${result.configuration_wc ?? "Configuration wc inconnue"}</li>
     <li>Accessibilité PMR : ${pmr}</li>
-    <li>${result.etat ?? "Pas plus d'informations"}</li>
+    <li>Vie: ${etat}</li>
     <li>${result.horaire_ouverture ?? "Pas plus d'informations"}</li>
     <li>${result.jour_ouverture ?? "Pas plus d'informations"}</li>
     <li>Type de wc : ${result.type_wc ?? "Pas plus d'informations"}</li>  
