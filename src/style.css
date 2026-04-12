@@ -69,3 +69,9 @@ button {
   margin-top: 12px;
   border-top: 1px solid #ccc;
 }
+footer {
+  text-align: justify;
+  border-top: solid 4px var(--color-border-card);
+  margin: 1rem;
+  padding: 1rem;
+}

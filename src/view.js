@@ -26,7 +26,6 @@ const getTypes = (result) => {
 
 const getSprite = (types, num) => {
   const card = document.getElementById(num);
-  console.log(card);
   types.forEach((type) => {
     addSprite(type, card);
   });
