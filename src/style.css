@@ -59,6 +59,13 @@ img {
   padding: 1rem;
 }
 button {
+  font-size: 0.7rem;
+  margin: 1rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  border: 3px solid aquamarine;
+  background-color: var(--color-bg);
   cursor: pointer;
 }
 .card-details.hidden {

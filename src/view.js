@@ -3,6 +3,7 @@ import { requestAPI } from "./data";
  *
  * @param {object} result toilette
  */
+export let allToilets = [];
 //**transformation
 // en fonction du type de wc et si d’equipement specifique ajout d’une evolution
 //     - type_wc :
@@ -88,7 +89,6 @@ export const createCards = (result) => {
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
   cards.setAttribute("id", num);
-
   //ajout image de remplacement si error ?
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
