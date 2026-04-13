@@ -83,13 +83,21 @@ export const createCards = (result) => {
   //création nouvel élement
   //création numero de carte
   const num = String(result.gid).padStart(3, "0");
+
+  //Img carte create
   const img = document.createElement("img");
   img.src = `./public/card-img/${num}.png`;
+  img.onerror = function () {
+    this.onerror = null; // desactive si image de défault n'existe éviter quelle fasse des appel, avant de changer le src
+    this.src = "./public/card-img/0404.png";
+  };
   img.classList.add("card-image");
+
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
   cards.setAttribute("id", num);
-  //ajout image de remplacement si error ?
+
+  //ajout image de remplacement si error
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
   const etat =
@@ -146,6 +154,7 @@ export const createCards = (result) => {
  * récupérer les données toilette publics
  *affiner ce que donne le donne le tableau
  */
+
 export const extractCitiesFromData = async () => {
   try {
     const response = await requestAPI();
