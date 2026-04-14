@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./public/icon-onglet-wc.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WCdex Nantes</title>
+  </head>
+  <body>
+    <header>
+      <img
+        id="logo"
+        src="./public/WCdex logo.png"
+        alt="Logo du site WCdex écrit dans le style pokemon"
+      />
+      <h1>Pokédex wc public de Nantes</h1>
+      <h2>Recherche</h2>
+      <input id="search" type="text" placeholder="Entrez le nom du quartier" />
+    </header>
+
+    <main>
+      <section id="map" style="width: 50%; height: 50vh"></section>
+      <section class="card-toilets"></section>
+    </main>
+
+    <footer>
+      <h4>WCdex Nantes · Données data.nantesmetropole.fr · Off Perianin</h4>
+    </footer>
+
+    <script type="module" src="/src/main.js"></script>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+  </body>
+</html>

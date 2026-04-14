@@ -1,0 +1,92 @@
+:root {
+  --color-bg: #6cb2b8;
+  --color-surface: #cdeae8;
+  --color-border: #378582;
+  --color-text: #114e67;
+  --color-text-heading: #c05e00;
+  --color-border-card: #fcc900;
+  --font: "Nunito", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+header {
+  background-color: var(--color-surface);
+  text-align: center;
+}
+#logo {
+  padding: 1rem;
+  width: auto;
+}
+.card-toilets {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  border-top: solid 4px var(--color-border-card);
+  margin: 1rem;
+  padding: 1rem;
+}
+
+#search {
+  width: 15%;
+  border: solid 2px var(--color-border);
+  margin: 1rem;
+  padding: 0.3rem;
+}
+
+.card-toilet {
+  height: 25%;
+  width: 22%;
+  border: 3px solid var(--color-border-card);
+  border-radius: 15px;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: var(--color-surface);
+  text-align: center;
+}
+ul {
+  list-style-type: none;
+  text-align: left;
+  padding: 0.5rem;
+}
+img {
+  width: 30%;
+  padding: 0.2rem;
+}
+.card-image {
+  width: 60%;
+  padding: 1rem;
+}
+button {
+  font-size: 0.7rem;
+  margin: 1rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.card-details.hidden {
+  display: none;
+}
+
+.card-details {
+  margin-top: 12px;
+  border-top: 1px solid #ccc;
+}
+footer {
+  text-align: justify;
+  border-top: solid 4px var(--color-border-card);
+  margin: 1rem;
+  padding: 1rem;
+}
+@media (max-width: 500px) {
+}
