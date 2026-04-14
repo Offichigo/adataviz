@@ -110,7 +110,7 @@ export const createCards = (result) => {
       <span class="card-num">n°${num}</span>
       <div class="card-sprite"></div>
     <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
-    <p>Apparais dans le quartier : ${result.quartier ?? "Pas renseigné"}</p>
+    <p>Quartier : ${result.quartier ?? "Pas renseigné"}</p>
     <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p> 
 
       <div class="card-details hidden"> 
