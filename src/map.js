@@ -1,5 +1,5 @@
-mapboxgl.accessToken =
-  "pk.eyJ1IjoibWFlbGllIiwiYSI6ImNtbnlvYTNjaTA0ZG8yb3I4bzR2OGl0engifQ.VQuGfWozqzE7jGU6rXwJdA";
+// mapboxgl.accessToken =
+//   "pk.eyJ1IjoibWFlbGllIiwiYSI6ImNtbnlvYTNjaTA0ZG8yb3I4bzR2OGl0engifQ.VQuGfWozqzE7jGU6rXwJdA";
 
 const API =
   "https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?limit=-1&refine=pole%3A%22Nantes%20Centralit%C3%A9%22&refine=commune%3A%22Nantes%22";
