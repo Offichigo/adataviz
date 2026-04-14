@@ -18,7 +18,7 @@ export const searchCities = async () => {
           createCards(cities);
         });
       } catch (err) {
-        console.error(err);
+        console.error("Erreur lors du chargement des toilettes :", err);
       }
     }
   });
