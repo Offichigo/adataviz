@@ -3,7 +3,7 @@ import { requestAPI } from "./data";
  *
  * @param {object} result toilette
  */
-export let allToilets = [];
+
 //**transformation
 // en fonction du type de wc et si d’equipement specifique ajout d’une evolution
 //     - type_wc :
