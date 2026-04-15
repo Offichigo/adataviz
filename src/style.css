@@ -27,32 +27,31 @@ header {
   padding: 1rem;
   width: auto;
 }
+#search {
+  width: clamp(200px, 40%, 400px); /* min / idéal / max */
+  border: solid 2px var(--color-border);
+  margin: 1rem;
+  padding: 0.3rem;
+}
 .card-toilets {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
   border-top: solid 4px var(--color-border-card);
   margin: 1rem;
   padding: 1rem;
 }
 
-#search {
-  width: 15%;
-  border: solid 2px var(--color-border);
-  margin: 1rem;
-  padding: 0.3rem;
-}
-
 .card-toilet {
-  height: 25%;
-  width: 22%;
+  width: 100%;
+  height: auto; /*  jamais de hauteur fixe */
   border: 3px solid var(--color-border-card);
   border-radius: 15px;
-  margin: 1rem;
   padding: 1rem;
   background-color: var(--color-surface);
   text-align: center;
 }
+
 ul {
   list-style-type: none;
   text-align: left;
@@ -89,4 +88,31 @@ footer {
   padding: 1rem;
 }
 @media (max-width: 500px) {
+  .card-toilets {
+    grid-template-columns: 1fr;
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+
+  #search {
+    width: 90%;
+    margin: 0.5rem auto;
+    display: block;
+  }
+
+  img {
+    width: 50%;
+  }
+
+  .card-image {
+    width: 80%;
+  }
+
+  header {
+    padding: 0.5rem;
+  }
+
+  #logo {
+    width: 60%;
+  }
 }
