@@ -52,8 +52,12 @@ btnNext.addEventListener("click", () => {
   currentPage = currentPage + 1;
   goToPage(currentPage, API_BASE, PER_PAGE);
 });
-document.getElementById("card-toilets").innerHTML = "<p>Chargement</p>";
-
+document.getElementById("card-toilets").innerHTML = `
+  <div id="loading">
+    <img src="public/toilet-gif-cat.gif" alt="chargement" />
+    <p>Chargement en cours...</p>
+  </div>
+`;
 setTimeout(async () => {
   await goToPage(currentPage, API_BASE, PER_PAGE);
 }, 10000);
