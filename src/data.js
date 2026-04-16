@@ -1,7 +1,7 @@
 export const requestAPI = async () => {
   const url =
     "https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?limit=-1&refine=pole%3A%22Nantes%20Centralit%C3%A9%22&refine=commune%3A%22Nantes%22";
-  console.log(url);
+  console.log("hello");
   try {
     const response = await fetch(url);
     const data = await response.json();

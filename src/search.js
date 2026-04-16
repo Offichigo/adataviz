@@ -1,8 +1,7 @@
 //  Lire ce que l'utilisateur a tapé
 //
-
-//creation validation recherche button ?
 import { createCards } from "./view.js";
+
 export const searchCities = async () => {
   document.querySelector("#search").addEventListener("keypress", async (e) => {
     if (e.code === "Enter") {
@@ -13,7 +12,7 @@ export const searchCities = async () => {
         const response = await fetch(url);
         const cities = await response.json();
         console.log(cities);
-        document.querySelector(".card-toilets").innerHTML = "";
+        document.getElementById("card-toilets").innerHTML = "";
         cities.results.forEach((cities) => {
           createCards(cities);
         });

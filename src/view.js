@@ -1,4 +1,3 @@
-import { requestAPI } from "./data";
 /**
  *
  * @param {object} result toilette
@@ -24,7 +23,11 @@ const getTypes = (result) => {
   if (result.equipement_table_langer === 1) types.push("Fée");
   return types;
 };
-
+/**
+ *
+ * @param {*} types type wc change type pokemon
+ * @param {*} num result data gid en num cart pokemon
+ */
 const getSprite = (types, num) => {
   const card = document.getElementById(num);
   types.forEach((type) => {
@@ -79,7 +82,7 @@ const addSprite = (type, card) => {
 
 //**Création de cartes */
 export const createCards = (result) => {
-  const section = document.querySelector(".card-toilets");
+  const section = document.getElementById("card-toilets");
   //création nouvel élement
   //création numero de carte
   const num = String(result.gid).padStart(3, "0");
@@ -150,20 +153,3 @@ export const createCards = (result) => {
  * adresse - commune - quartier- type equip - acces pmr (true false)-hour-état=boolean
  *
  */
-/**
- * récupérer les données toilette publics
- *affiner ce que donne le donne le tableau
- */
-
-export const extractCitiesFromData = async () => {
-  try {
-    const response = await requestAPI();
-    response.results.forEach((toilet) => createCards(toilet));
-  } catch (err) {
-    console.error("Erreur lors du chargement des toilettes :", err);
-  }
-};
-
-//recuperer les noms des communes une par une dans un tableau
-//retourner les noms
-//afficher
