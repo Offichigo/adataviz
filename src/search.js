@@ -6,13 +6,14 @@ export const searchCities = async () => {
   document.querySelector("#search").addEventListener("keypress", async (e) => {
     if (e.code === "Enter") {
       let getCities = document.querySelector("#search").value;
-      console.log(getCities);
+
       const url = `https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?where=quartier like "${getCities}%"&limit=-1`;
       try {
         const response = await fetch(url);
         const cities = await response.json();
-        console.log(cities);
+
         document.getElementById("card-toilets").innerHTML = "";
+        document.querySelector(".button").innerHTML = "";
         cities.results.forEach((cities) => {
           createCards(cities);
         });

@@ -41,15 +41,25 @@ const btnNext = document.getElementById("next");
 //* Bouton page
 
 btnPrev.addEventListener("click", () => {
-  currentPage = currentPage - 1;
-  goToPage(currentPage, API_BASE, PER_PAGE);
+  if (currentPage >= 2) {
+    currentPage = currentPage - 1;
+    goToPage(currentPage, API_BASE, PER_PAGE);
+  } else {
+    console.warn("Mauvais Index");
+  }
 });
 btnNext.addEventListener("click", () => {
   currentPage = currentPage + 1;
   goToPage(currentPage, API_BASE, PER_PAGE);
 });
-await goToPage(currentPage, API_BASE, PER_PAGE);
+document.getElementById("card-toilets").innerHTML = "<p>Chargement</p>";
 
+setTimeout(async () => {
+  await goToPage(currentPage, API_BASE, PER_PAGE);
+}, 10000);
+//si curent page est >= 2 alors on peut descendre à -1
+//mais si current page est = à 1 il faut bloquer à 1
+//
 //____________________________________________________________________________________________________________________________________
 
 //* Call Fonction: pour affichage map et le fonctionnement de la barre de recherche
