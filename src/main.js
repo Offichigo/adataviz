@@ -1,5 +1,4 @@
 import "./style.css";
-import { requestAPI } from "./data";
 import { searchCities } from "./search";
 import { fetchmarkers } from "./map";
 import { goToPage } from "./page";
@@ -14,7 +13,7 @@ let totalCount = 0;
 mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
 
 const API =
-  "https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?limit=-1&refine=pole%3A%22Nantes%20Centralit%C3%A9%22&refine=commune%3A%22Nantes%22";
+  "https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?limit=-1";
 
 //connect
 let map = new mapboxgl.Map({

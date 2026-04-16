@@ -7,7 +7,7 @@ export const searchCities = async () => {
     if (e.code === "Enter") {
       let getCities = document.querySelector("#search").value;
       console.log(getCities);
-      const url = `https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?where=quartier like "${getCities}%"&limit=-1&refine=pole%3A%22Nantes%20Centralit%C3%A9%22`;
+      const url = `https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?where=quartier like "${getCities}%"&limit=-1`;
       try {
         const response = await fetch(url);
         const cities = await response.json();
