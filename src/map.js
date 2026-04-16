@@ -1,3 +1,8 @@
+/**
+ *
+ * @param {*} API
+ * @param {*} map
+ */
 export async function fetchmarkers(API, map) {
   const response = await fetch(API);
   const data = await response.json();
@@ -44,6 +49,5 @@ function buildPopupHTML(marker) {
     <div class="popup-row"><span class="popup-label">Quartier: </span><span class="popup-value">${cities}</span></div>
     <div class="popup-row"><span class="popup-label">Type de wc: </span><span class="popup-value">${espece}</span></div>
         <div class="popup-row"><span class="popup-label">Êtat: </span><span class="popup-value">${state}</span></div>
-
   `;
 }

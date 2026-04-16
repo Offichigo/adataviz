@@ -36,9 +36,9 @@ const getSprite = (types, num) => {
     addSprite(type, card);
   });
 };
+
 const addSprite = (type, card) => {
   const imgTypes = document.createElement("img");
-
   switch (type) {
     case "Poison":
       imgTypes.setAttribute(
@@ -118,7 +118,6 @@ export const createCards = (result) => {
   cards.classList.add("card-toilet");
   cards.setAttribute("id", num);
 
-  //ajout image de remplacement si error
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
   const etat =
