@@ -1,27 +1,19 @@
-mapboxgl.accessToken = import.meta.env.VITE_MAPBOX_TOKEN;
-
-const API =
-  "https://data.nantesmetropole.fr/api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?limit=-1&refine=pole%3A%22Nantes%20Centralit%C3%A9%22&refine=commune%3A%22Nantes%22";
-
-//connect
-let map = new mapboxgl.Map({
-  container: "map",
-  style: "mapbox://styles/maelie/cmb7nnzmz00r901pact8o1xtf",
-  center: [-1.55, 47.216671],
-  zoom: 10,
-});
-
-export async function fetchmarkers() {
+/**
+ *
+ * @param {*} API
+ * @param {*} map
+ */
+export async function fetchmarkers(API, map) {
   const response = await fetch(API);
   const data = await response.json();
   const markers = data.results;
-  addMarkersToMap(markers);
-  fitMapToMarkers(markers);
+  addMarkersToMap(markers, map);
+  fitMapToMarkers(markers, map);
 }
 
 // ── addMarkersToMap() ─────────────────────────────────────────────────────────
 
-function addMarkersToMap(markers) {
+function addMarkersToMap(markers, map) {
   markers.forEach((marker) => {
     const popup = new mapboxgl.Popup({ maxWidth: "260px" }).setHTML(
       buildPopupHTML(marker),
@@ -36,7 +28,7 @@ function addMarkersToMap(markers) {
 
 // ── fitMapToMarkers() ─────────────────────────────────────────────────────────
 
-function fitMapToMarkers(markers) {
+function fitMapToMarkers(markers, map) {
   const bounds = new mapboxgl.LngLatBounds();
   markers.forEach((marker) =>
     bounds.extend([marker.geo_point_2d.lon, marker.geo_point_2d.lat]),
@@ -57,6 +49,5 @@ function buildPopupHTML(marker) {
     <div class="popup-row"><span class="popup-label">Quartier: </span><span class="popup-value">${cities}</span></div>
     <div class="popup-row"><span class="popup-label">Type de wc: </span><span class="popup-value">${espece}</span></div>
         <div class="popup-row"><span class="popup-label">Êtat: </span><span class="popup-value">${state}</span></div>
-
   `;
 }

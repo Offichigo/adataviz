@@ -1,4 +1,3 @@
-import { requestAPI } from "./data";
 /**
  *
  * @param {object} result toilette
@@ -19,21 +18,27 @@ const getTypes = (result) => {
   if (result.type_wc === "Cabine automatique") types.push("Ténèbre", "Spectre");
   else if (result.type_wc === "Mobilier" || result.type_wc === "Bâtiment")
     types.push("Eau");
+  else types.push("Normal");
   //evolution pokemon
   if (result.equipement_urinoir >= 1) types.push("Poison");
   if (result.equipement_table_langer === 1) types.push("Fée");
+  if (result.equipement_turque >= 1) types.push("Combat");
   return types;
 };
-
+/**
+ *
+ * @param {*} types type wc change type pokemon
+ * @param {*} num result data gid en num cart pokemon
+ */
 const getSprite = (types, num) => {
   const card = document.getElementById(num);
   types.forEach((type) => {
     addSprite(type, card);
   });
 };
+
 const addSprite = (type, card) => {
   const imgTypes = document.createElement("img");
-
   switch (type) {
     case "Poison":
       imgTypes.setAttribute(
@@ -73,13 +78,29 @@ const addSprite = (type, card) => {
         "icone type de pokemon Fée",
       );
       break;
+    case "Combat":
+      imgTypes.setAttribute(
+        "src",
+        "public/icon-type-WCdex/Miniature_Type_Combat_EV.png",
+        "alt",
+        "icone type de pokemon Combat",
+      );
+      break;
+    case "Normal":
+      imgTypes.setAttribute(
+        "src",
+        "public/icon-type-WCdex/Miniature_Type_Normal_EV.png",
+        "alt",
+        "icone type de pokemon Normal",
+      );
+      break;
   }
   card.appendChild(imgTypes);
 };
 
 //**Création de cartes */
 export const createCards = (result) => {
-  const section = document.querySelector(".card-toilets");
+  const section = document.getElementById("card-toilets");
   //création nouvel élement
   //création numero de carte
   const num = String(result.gid).padStart(3, "0");
@@ -97,7 +118,6 @@ export const createCards = (result) => {
   cards.classList.add("card-toilet");
   cards.setAttribute("id", num);
 
-  //ajout image de remplacement si error
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
   const etat =
@@ -124,6 +144,7 @@ export const createCards = (result) => {
     <li>Type de wc : ${result.type_wc ?? "Pas plus d'informations"}</li>  
     <li>Equipement Table à langer : ${result.equipement_table_langer === 1 ? "✓" : "✗"}</li>
     <li>Equipement urinoir : ${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
+    <li>Equipement WC turque : ${result.equipement_turque ?? "Pas plus d'informations"}</li>
     </ul>
       </div>
        <button class="btn-details">Voir plus</button> `;
@@ -150,20 +171,3 @@ export const createCards = (result) => {
  * adresse - commune - quartier- type equip - acces pmr (true false)-hour-état=boolean
  *
  */
-/**
- * récupérer les données toilette publics
- *affiner ce que donne le donne le tableau
- */
-
-export const extractCitiesFromData = async () => {
-  try {
-    const response = await requestAPI();
-    response.results.forEach((toilet) => createCards(toilet));
-  } catch (err) {
-    console.error("Erreur lors du chargement des toilettes :", err);
-  }
-};
-
-//recuperer les noms des communes une par une dans un tableau
-//retourner les noms
-//afficher
