@@ -1,6 +1,8 @@
 import { createCards } from "../view";
 import { modifyTotalCount } from "../main";
 
+//!______Component-Rendu des cartes et affichage pagination-________//
+
 export function renderCards(markers) {
   const grid = document.getElementById("card-toilets");
   grid.innerHTML = "";
