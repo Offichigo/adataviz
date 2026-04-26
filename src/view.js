@@ -50,48 +50,36 @@ const addSprite = (type, card) => {
       imgTypes.setAttribute(
         "src",
         "/icon-type-WCdex/120px-Miniature_Type_Eau_EV.png",
-        "alt",
-        "icone type de pokemon Eau",
       );
       break;
     case "Ténèbre":
       imgTypes.setAttribute(
         "src",
         "/icon-type-WCdex/120px-Miniature_Type_Ténèbres_EV.png",
-        "alt",
-        "icone type de pokemon Ténèbre",
       );
       break;
     case "Spectre":
       imgTypes.setAttribute(
         "src",
         "/icon-type-WCdex/120px-Miniature_Type_Spectre_EV.png",
-        "alt",
-        "icone type de pokemon Spectre",
       );
       break;
     case "Fée":
       imgTypes.setAttribute(
         "src",
         "/icon-type-WCdex/120px-Miniature_Type_Fée_EV.png",
-        "alt",
-        "icone type de pokemon Fée",
       );
       break;
     case "Combat":
       imgTypes.setAttribute(
         "src",
         "/icon-type-WCdex/Miniature_Type_Combat_EV.png",
-        "alt",
-        "icone type de pokemon Combat",
       );
       break;
     case "Normal":
       imgTypes.setAttribute(
         "src",
         "/icon-type-WCdex/Miniature_Type_Normal_EV.png",
-        "alt",
-        "icone type de pokemon Normal",
       );
       break;
   }
