@@ -55,7 +55,7 @@ const addSprite = (type, card) => {
     case "Ténèbre":
       imgTypes.setAttribute(
         "src",
-        "/icon-type-WCdex/120px-Miniature_Type_Ténèbres_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Tenebres_EV.png",
       );
       break;
     case "Spectre":
@@ -67,7 +67,7 @@ const addSprite = (type, card) => {
     case "Fée":
       imgTypes.setAttribute(
         "src",
-        "/icon-type-WCdex/120px-Miniature_Type_Fée_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Fee_EV.png",
       );
       break;
     case "Combat":
