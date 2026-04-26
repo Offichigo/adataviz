@@ -43,13 +43,13 @@ const addSprite = (type, card) => {
     case "Poison":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Poison_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Poison_EV.png",
       );
       break;
     case "Eau":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Eau_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Eau_EV.png",
         "alt",
         "icone type de pokemon Eau",
       );
@@ -57,7 +57,7 @@ const addSprite = (type, card) => {
     case "Ténèbre":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Ténèbres_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Ténèbres_EV.png",
         "alt",
         "icone type de pokemon Ténèbre",
       );
@@ -65,7 +65,7 @@ const addSprite = (type, card) => {
     case "Spectre":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Spectre_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Spectre_EV.png",
         "alt",
         "icone type de pokemon Spectre",
       );
@@ -73,7 +73,7 @@ const addSprite = (type, card) => {
     case "Fée":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Fée_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Fée_EV.png",
         "alt",
         "icone type de pokemon Fée",
       );
@@ -81,7 +81,7 @@ const addSprite = (type, card) => {
     case "Combat":
       imgTypes.setAttribute(
         "src",
-        "public/icon-type-WCdex/Miniature_Type_Combat_EV.png",
+        "/icon-type-WCdex/Miniature_Type_Combat_EV.png",
         "alt",
         "icone type de pokemon Combat",
       );
@@ -89,7 +89,7 @@ const addSprite = (type, card) => {
     case "Normal":
       imgTypes.setAttribute(
         "src",
-        "public/icon-type-WCdex/Miniature_Type_Normal_EV.png",
+        "/icon-type-WCdex/Miniature_Type_Normal_EV.png",
         "alt",
         "icone type de pokemon Normal",
       );
@@ -107,10 +107,10 @@ export const createCards = (result) => {
 
   //Img carte create
   const img = document.createElement("img");
-  img.src = `./public/card-img/${num}.png`;
+  img.src = `/card-img/${num}.png`;
   img.onerror = function () {
     this.onerror = null; // desactive si image de défault n'existe éviter quelle fasse des appel, avant de changer le src
-    this.src = "./public/card-img/0404.png";
+    this.src = "/card-img/0404.png";
   };
   img.classList.add("card-image");
 
