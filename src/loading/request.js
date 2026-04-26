@@ -1,3 +1,7 @@
+//!______request-Appels API paginés (limit / offset)-________//
+//*limit :Nombre de résultats par page
+//*offset : Point de démmarage pour la pagination
+
 /**
  *
  * @param {*} page

@@ -3,6 +3,7 @@ import { searchCities } from "./search";
 import { fetchmarkers } from "./map";
 import { goToPage } from "./page";
 //____________________________________________________________________________________________________________________________________
+//!__________main-Point d'entrée, pagination (listen!), connexion carte Mapbox-__________//
 //*DATA
 
 const API_BASE =

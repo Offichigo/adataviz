@@ -10,6 +10,7 @@ import {
   resertApiUrl,
 } from "./main.js";
 
+//Recherche par quartier obtient tableau de quartier unique et non null
 export const searchCities = async () => {
   const urlAllCities = `https://data.nantesmetropole.fr//api/explore/v2.1/catalog/datasets/244400404_toilettes-publiques-nantes-metropole/records?select=quartier&limit=-1`;
   try {
@@ -36,6 +37,10 @@ export const searchCities = async () => {
   });
 };
 
+/**
+ *
+ * @param {*} getCities
+ */
 const searchToilletByCity = async (getCities) => {
   removeSuggestion();
   if (getCities == "") {
@@ -58,6 +63,11 @@ const searchToilletByCity = async (getCities) => {
 //filter dans l'api du
 //utiliser where???
 
+/**
+ *
+ * @param {*} input l'élément sur lequelle on construit la suggestion de recherche
+ * @param {*} list liste de suggestions pour la recherche
+ */
 const suggestionSearch = (input, list) => {
   input.addEventListener("input", () => {
     removeSuggestion();
@@ -79,6 +89,8 @@ const suggestionSearch = (input, list) => {
     input.parentNode.appendChild(suggestions);
   });
 };
+
+//*Supprime la suggestion au clique à chaque fois que le user tape
 
 const removeSuggestion = () => {
   const suggestions = document.getElementById("suggestions");
