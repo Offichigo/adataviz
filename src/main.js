@@ -79,7 +79,7 @@ btnNext.addEventListener("click", () => {
 });
 document.getElementById("card-toilets").innerHTML = `
   <div id="loading">
-    <img src="public/toilet-gif-cat.gif" alt="chargement" />
+    <img src="/toilet-gif-cat.gif" alt="chargement" />
     <p>Chargement en cours...</p>
   </div>
 `;

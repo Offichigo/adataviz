@@ -43,55 +43,43 @@ const addSprite = (type, card) => {
     case "Poison":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Poison_EV.png",
+        "/icon-type-WCdex/120px-Miniature_Type_Poison_EV.png",
       );
       break;
     case "Eau":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Eau_EV.png",
-        "alt",
-        "icone type de pokemon Eau",
+        "/icon-type-WCdex/120px-Miniature_Type_Eau_EV.png",
       );
       break;
     case "Ténèbre":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Ténèbres_EV.png",
-        "alt",
-        "icone type de pokemon Ténèbre",
+        "/icon-type-WCdex/120px-Miniature_Type_Tenebres_EV.png",
       );
       break;
     case "Spectre":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Spectre_EV.png",
-        "alt",
-        "icone type de pokemon Spectre",
+        "/icon-type-WCdex/120px-Miniature_Type_Spectre_EV.png",
       );
       break;
     case "Fée":
       imgTypes.setAttribute(
         "src",
-        "./public/icon-type-WCdex/120px-Miniature_Type_Fée_EV.png",
-        "alt",
-        "icone type de pokemon Fée",
+        "/icon-type-WCdex/120px-Miniature_Type_Fee_EV.png",
       );
       break;
     case "Combat":
       imgTypes.setAttribute(
         "src",
-        "public/icon-type-WCdex/Miniature_Type_Combat_EV.png",
-        "alt",
-        "icone type de pokemon Combat",
+        "/icon-type-WCdex/Miniature_Type_Combat_EV.png",
       );
       break;
     case "Normal":
       imgTypes.setAttribute(
         "src",
-        "public/icon-type-WCdex/Miniature_Type_Normal_EV.png",
-        "alt",
-        "icone type de pokemon Normal",
+        "/icon-type-WCdex/Miniature_Type_Normal_EV.png",
       );
       break;
   }
@@ -107,10 +95,10 @@ export const createCards = (result) => {
 
   //Img carte create
   const img = document.createElement("img");
-  img.src = `./public/card-img/${num}.png`;
+  img.src = `/card-img/${num}.png`;
   img.onerror = function () {
     this.onerror = null; // desactive si image de défault n'existe éviter quelle fasse des appel, avant de changer le src
-    this.src = "./public/card-img/0404.png";
+    this.src = "/card-img/0404.png";
   };
   img.classList.add("card-image");
 
