@@ -30,8 +30,8 @@ const getTypes = (result) => {
  * @param {*} types type wc change type pokemon
  * @param {*} num result data gid en num cart pokemon
  */
-const getSprite = (types, num) => {
-  const card = document.querySelector(`#wc-${num} .card-types-icons`);
+const getSprite = (types, cardElement) => {
+  const iconsContainer = cardElement.querySelector(".card-types-icons");
   types.forEach((type) => {
     addSprite(type, iconsContainer);
   });
