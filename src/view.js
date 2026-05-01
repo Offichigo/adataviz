@@ -31,9 +31,9 @@ const getTypes = (result) => {
  * @param {*} num result data gid en num cart pokemon
  */
 const getSprite = (types, num) => {
-  const card = document.querySelector(`#${num} .card-types-icons`);
+  const card = document.querySelector(`#wc-${num} .card-types-icons`);
   types.forEach((type) => {
-    addSprite(type, card);
+    addSprite(type, iconsContainer);
   });
 };
 
@@ -104,7 +104,7 @@ export const createCards = (result) => {
 
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
-  cards.setAttribute("id", num);
+  cards.setAttribute("id", `wc-${num}`);
 
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
@@ -156,7 +156,7 @@ export const createCards = (result) => {
       : "Voir moins";
   });
   section.appendChild(cards);
-  getSprite(types, num);
+  getSprite(types, cards);
 };
 //** pour .toggle Si la classe est absente => il l'ajoute/ Si la classe est présente => il la retire
 /**

@@ -55,6 +55,10 @@ body {
   color: var(--color-text);
 }
 
+img {
+  display: block;
+}
+
 /* ══════════════════════════════════════════
    HEADER
    ══════════════════════════════════════════ */
@@ -68,7 +72,7 @@ header {
 #logo {
   height: 100px;
   width: auto;
-  margin-bottom: 6px;
+  margin: 0 auto 6px;
 }
 
 header h1 {
@@ -154,9 +158,11 @@ h2 {
     background 0.1s,
     padding-left 0.15s;
 }
+
 #suggestions p:last-child {
   border-bottom: none;
 }
+
 #suggestions p:hover {
   background: var(--color-surface2);
   color: var(--color-heading);
@@ -178,11 +184,13 @@ h2 {
   color: var(--color-text-heading);
   font-family: var(--font);
 }
+
 .popup-title {
   color: var(--color-gold);
   font-family: var(--font);
   font-size: 18px;
 }
+
 .popup-row,
 .popup-label,
 .popup-value {
@@ -226,6 +234,7 @@ main {
   transition:
     transform 0.15s,
     box-shadow 0.15s;
+  overflow: hidden;
 }
 
 .card-toilet:hover {
@@ -233,14 +242,14 @@ main {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* ── Colonne gauche — image ── */
+/* ── Colonne gauche — image + numéro ── */
 .card-left {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
   flex-shrink: 0;
-  width: 80px;
+  width: 90px;
 }
 
 .card-num {
@@ -249,9 +258,17 @@ main {
   color: var(--color-border);
 }
 
+.card-sprite {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card-image {
-  width: 70px;
-  height: 70px;
+  width: 78px;
+  height: 78px;
   object-fit: contain;
   background: rgba(255, 255, 255, 0.08);
   border-radius: 50%;
@@ -263,8 +280,8 @@ main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  min-width: 0; /* évite le débordement du texte */
+  gap: 5px;
+  min-width: 0;
   text-align: left;
 }
 
@@ -278,37 +295,36 @@ main {
   width: 100%;
 }
 
-.card-right p {
+.card-quartier {
   font-size: 12px;
   color: var(--color-text-muted);
 }
 
-/* icônes de type */
+.card-types-text {
+  font-size: 12px;
+  color: var(--color-text-muted);
+}
+
+/* ── Icônes de type ── */
 .card-types-icons {
   display: flex;
   flex-wrap: wrap;
-  gap: 3px;
+  gap: 4px;
   margin: 2px 0;
 }
 
-.card-types-icons img,
-.card-sprite img {
-  width: 26px;
+.card-types-icons img {
+  width: 28px;
   height: auto;
   padding: 0;
-}
-
-/* fallback si pas de .card-left / .card-right (ancien HTML) */
-img {
-  width: 20%;
-  padding: 0.2rem;
+  display: inline-block;
 }
 
 /* ══════════════════════════════════════════
    DÉTAILS DE CARTE
    ══════════════════════════════════════════ */
 .card-details {
-  margin-top: 8px;
+  margin-top: 6px;
   border-top: 1px solid rgba(55, 133, 130, 0.3);
   padding-top: 8px;
   width: 100%;
@@ -325,7 +341,7 @@ ul {
 
 ul li {
   font-size: 12px;
-  padding: 3px 0;
+  padding: 4px 0;
   border-bottom: 0.5px solid rgba(55, 133, 130, 0.2);
   display: flex;
   justify-content: space-between;
@@ -341,6 +357,7 @@ ul li:last-child {
    ══════════════════════════════════════════ */
 .btn-details {
   margin-top: 8px;
+  align-self: flex-start;
   width: 42px;
   height: 42px;
   border-radius: 50%;
@@ -348,10 +365,10 @@ ul li:last-child {
   background-color: var(--color-gold);
   cursor: pointer;
   font-size: 0;
-  position: relative;
-  overflow: hidden;
   transition: transform 0.15s;
   flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-details:hover {
@@ -359,7 +376,7 @@ ul li:last-child {
 }
 
 /* ══════════════════════════════════════════
-   BOUTONS POKÉBALL (prev / next / search)
+   BOUTONS POKÉBALL — prev / next / search
    ══════════════════════════════════════════ */
 .pokeball-btn,
 #prev,
@@ -449,6 +466,7 @@ ul li:last-child {
 
 #loading img {
   width: 90px;
+  height: auto;
   border-radius: 8px;
   padding: 0;
 }
@@ -487,24 +505,28 @@ footer h4 {
     padding: 0.5rem;
   }
 
-  /* carte repasse en colonne sur mobile */
   .card-toilet {
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
 
   .card-left {
     width: 100%;
+    align-items: center;
   }
 
   .card-right {
     width: 100%;
     text-align: center;
+    align-items: center;
   }
 
   .card-types-icons {
     justify-content: center;
+  }
+
+  .btn-details {
+    align-self: center;
   }
 
   #search {
