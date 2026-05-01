@@ -31,7 +31,7 @@ const getTypes = (result) => {
  * @param {*} num result data gid en num cart pokemon
  */
 const getSprite = (types, num) => {
-  const card = document.getElementById(num);
+  const card = document.querySelector(`#${num} .card-types-icons`);
   types.forEach((type) => {
     addSprite(type, card);
   });
@@ -115,27 +115,35 @@ export const createCards = (result) => {
         ? "💀"
         : "🛠️";
   cards.innerHTML = `
-      <span class="card-num">n°${num}</span>
-      <div class="card-sprite"></div>
-    <h3 class="name-card">${result.nom ?? "Nom inconnue"}</h3>
-    <p>Quartier : ${result.quartier ?? "Pas renseigné"}</p>
-    <p class="card-types">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p> 
+  <div class="card-left">
+    <span class="card-num">n°${num}</span>
+    <div class="card-sprite"></div>
+  </div>
 
-      <div class="card-details hidden"> 
-    <ul>
-    <li>${result.pole ?? "Pôle inconnue"}</li>
-    <li>${result.configuration_wc ?? "Configuration wc inconnue"}</li>
-    <li>Accessibilité PMR : ${pmr}</li>
-    <li>Vie: ${etat}</li>
-    <li>${result.horaire_ouverture ?? "Pas plus d'informations"}</li>
-    <li>${result.jour_ouverture ?? "Pas plus d'informations"}</li>
-    <li>Type de wc : ${result.type_wc ?? "Pas plus d'informations"}</li>  
-    <li>Equipement Table à langer : ${result.equipement_table_langer === 1 ? "✓" : "✗"}</li>
-    <li>Equipement urinoir : ${result.equipement_urinoir ?? "Pas plus d'informations"}</li>
-    <li>Equipement WC turque : ${result.equipement_turque ?? "Pas plus d'informations"}</li>
-    </ul>
-      </div>
-       <button class="btn-details">Voir plus</button> `;
+  <div class="card-right">
+    <h3 class="name-card">${result.nom ?? "Nom inconnu"}</h3>
+    <p class="card-quartier">📍 ${result.quartier ?? "Pas renseigné"}</p>
+    <p class="card-types-text">Type(s) : ${types.length > 0 ? types.join(" / ") : "Normal"}</p>
+    <div class="card-types-icons"></div>
+
+    <div class="card-details hidden">
+      <ul>
+        <li>Pôle : ${result.pole ?? "Inconnu"}</li>
+        <li>Configuration : ${result.configuration_wc ?? "Inconnue"}</li>
+        <li>Accessibilité PMR : ${pmr}</li>
+        <li>État : ${etat}</li>
+        <li>Horaires : ${result.horaire_ouverture ?? "—"}</li>
+        <li>Jours : ${result.jour_ouverture ?? "—"}</li>
+        <li>Type WC : ${result.type_wc ?? "—"}</li>
+        <li>Table à langer : ${result.equipement_table_langer === 1 ? "✓" : "✗"}</li>
+        <li>Urinoirs : ${result.equipement_urinoir ?? 0}</li>
+        <li>WC turc : ${result.equipement_turque ?? "—"}</li>
+      </ul>
+    </div>
+
+    <button class="btn-details">Voir plus</button>
+  </div>
+`;
   cards.querySelector(".card-sprite").appendChild(img);
 
   cards.querySelector(".btn-details").addEventListener("click", () => {
@@ -150,7 +158,7 @@ export const createCards = (result) => {
   section.appendChild(cards);
   getSprite(types, num);
 };
-
+//** pour .toggle Si la classe est absente => il l'ajoute/ Si la classe est présente => il la retire
 /**
  * * ecoute du clique
  * ajout au clique changement de la carte
