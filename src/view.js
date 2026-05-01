@@ -33,7 +33,7 @@ const getTypes = (result) => {
 const getSprite = (types, num) => {
   const card = document.querySelector(`#wc-${num} .card-types-icons`);
   types.forEach((type) => {
-    addSprite(type, card);
+    addSprite(type, iconsContainer);
   });
 };
 
@@ -156,7 +156,7 @@ export const createCards = (result) => {
       : "Voir moins";
   });
   section.appendChild(cards);
-  getSprite(types, num);
+  getSprite(types, cards);
 };
 //** pour .toggle Si la classe est absente => il l'ajoute/ Si la classe est présente => il la retire
 /**
