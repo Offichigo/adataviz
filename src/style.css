@@ -1,3 +1,9 @@
+/* ══════════════════════════════════════════
+   WCDEX — style.css
+   Mode clair / sombre automatique
+   ══════════════════════════════════════════ */
+
+/* ── VARIABLES MODE CLAIR ── */
 @media (prefers-color-scheme: light) {
   :root {
     --color-bg: #6cb2b8;
@@ -5,12 +11,17 @@
     --color-surface2: #b8deda;
     --color-border: #378582;
     --color-text: #114e67;
+    --color-text-muted: #4a8a87;
     --color-text-heading: #c05e00;
+    --color-heading: #c05e00;
     --color-border-card: #fcc900;
+    --color-gold: #fcc900;
     --font: "Nunito", system-ui, sans-serif;
     --font-size: 16px;
   }
 }
+
+/* ── VARIABLES MODE SOMBRE ── */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-bg: #1a2a2e;
@@ -19,6 +30,7 @@
     --color-border: #378582;
     --color-text: #d4eeed;
     --color-text-muted: #8ab8b6;
+    --color-text-heading: #fcc900;
     --color-heading: #fcc900;
     --color-border-card: #fcc900;
     --color-gold: #fcc900;
@@ -26,25 +38,33 @@
     --font-size: 16px;
   }
 }
+
+/* ══════════════════════════════════════════
+   BASE
+   ══════════════════════════════════════════ */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-size: var(--font-size);
 }
 
 body {
   font-family: var(--font);
+  font-size: var(--font-size);
   background: var(--color-bg);
   color: var(--color-text);
 }
-/** ── HEAD ── */
+
+/* ══════════════════════════════════════════
+   HEADER
+   ══════════════════════════════════════════ */
 header {
   background: var(--color-surface);
   text-align: center;
-  padding: 1.25em 1rem 1rem;
+  padding: 1.25rem 1rem 1rem;
   border-bottom: 4px solid var(--color-gold);
 }
+
 #logo {
   height: 100px;
   width: auto;
@@ -56,32 +76,50 @@ header h1 {
   color: var(--color-text-muted);
   margin-bottom: 12px;
 }
+
 h2 {
   font-style: oblique;
-  color: gray;
+  color: var(--color-text-muted);
   margin-bottom: 6px;
 }
 
-/* ── SEARCH WRAP ── */
-.search-wrap,
-#search {
+/* ══════════════════════════════════════════
+   BARRE DE RECHERCHE
+   ══════════════════════════════════════════ */
+.search-wrap {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 8px;
   padding: 7px;
 }
+
 #search {
   width: clamp(260px, 51%, 380px);
   background: var(--color-surface);
   border: 2px solid var(--color-border);
   border-radius: 12px;
+  padding: 8px 14px;
+  font-family: var(--font);
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.2s;
 }
+
+#search::placeholder {
+  color: var(--color-text-muted);
+}
+
+#search:focus {
+  border-color: var(--color-gold);
+}
+
 /* ── SUGGESTIONS ── */
 #suggestions {
   position: absolute;
-  top: calc(100% - 4px); /* colle sous l'input */
+  top: calc(100% + 2px);
   left: 50%;
   transform: translateX(-50%);
   width: clamp(260px, 50%, 380px);
@@ -93,10 +131,8 @@ h2 {
   z-index: 100;
   max-height: 220px;
   overflow-y: auto;
-  text-align: justify;
 }
 
-/* scrollbar discrète */
 #suggestions::-webkit-scrollbar {
   width: 6px;
 }
@@ -121,18 +157,23 @@ h2 {
 #suggestions p:last-child {
   border-bottom: none;
 }
-
 #suggestions p:hover {
   background: var(--color-surface2);
   color: var(--color-heading);
-  padding-left: 22px; /* petit glissement au hover */
+  padding-left: 22px;
 }
-/** ── CARTE ── */
+
+/* ══════════════════════════════════════════
+   CARTE MAPBOX
+   ══════════════════════════════════════════ */
 #map {
+  width: 100%;
+  height: 45vh;
   border-bottom: 3px solid var(--color-border-card);
+  border-radius: 10px;
   overflow: hidden;
-  color: var(--color-text);
 }
+
 .mapboxgl-popup-content {
   color: var(--color-text-heading);
   font-family: var(--font);
@@ -148,40 +189,87 @@ h2 {
   color: var(--color-border);
   font-size: 14px;
 }
-/** __Main carte des toilettes et détails__*/
+
+/* ══════════════════════════════════════════
+   MAIN
+   ══════════════════════════════════════════ */
 main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
   padding: 1rem;
 }
+
+/* ══════════════════════════════════════════
+   GRILLE DES CARTES
+   ══════════════════════════════════════════ */
 #card-toilets {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  border-top: solid 4px var(--color-border-card);
-  margin: 1rem;
-  padding: 1rem;
+  border-top: 4px solid var(--color-border-card);
+  padding-top: 1rem;
 }
 
+/* ══════════════════════════════════════════
+   CARTE — LAYOUT HORIZONTAL
+   ══════════════════════════════════════════ */
 .card-toilet {
-  width: 100%;
-  height: auto; /*  jamais de hauteur fixe */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 0.75rem;
   border: 3px solid var(--color-border-card);
   border-radius: 15px;
-  padding: 1rem;
+  padding: 0.875rem;
   background-color: var(--color-surface);
-  text-align: center;
+  transition:
+    transform 0.15s,
+    box-shadow 0.15s;
+}
+
+.card-toilet:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Colonne gauche — image ── */
+.card-left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  width: 80px;
 }
 
 .card-num {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
   color: var(--color-border);
 }
 
+.card-image {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  padding: 6px;
+}
+
+/* ── Colonne droite — infos ── */
+.card-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0; /* évite le débordement du texte */
+  text-align: left;
+}
+
 .name-card {
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--color-text-heading);
   white-space: nowrap;
@@ -189,64 +277,107 @@ main {
   text-overflow: ellipsis;
   width: 100%;
 }
-ul {
-  list-style: none;
-  padding: 0;
+
+.card-right p {
   font-size: 12px;
+  color: var(--color-text-muted);
 }
 
-ul li {
-  padding: 3px 0;
-  border-bottom: 0.5px solid rgba(55, 133, 130, 0.2);
+/* icônes de type */
+.card-types-icons {
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin: 2px 0;
 }
+
+.card-types-icons img,
+.card-sprite img {
+  width: 26px;
+  height: auto;
+  padding: 0;
+}
+
+/* fallback si pas de .card-left / .card-right (ancien HTML) */
 img {
   width: 20%;
   padding: 0.2rem;
 }
-.card-image {
-  width: 60%;
-  padding: 1rem;
+
+/* ══════════════════════════════════════════
+   DÉTAILS DE CARTE
+   ══════════════════════════════════════════ */
+.card-details {
+  margin-top: 8px;
+  border-top: 1px solid rgba(55, 133, 130, 0.3);
+  padding-top: 8px;
+  width: 100%;
 }
-/* ajout animation hover et changement couleur plus bulle d'eau des deux modes */
-.btn-details {
-  font-size: 0.7rem;
-  margin: 1rem;
-  border-radius: 50%;
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  border: 2.5px solid var(--color-bg);
-  background-color: var(--color-gold);
-  cursor: pointer;
-}
+
 .card-details.hidden {
   display: none;
 }
 
-.card-details {
-  margin-top: 12px;
-  border-top: 1px solid #ccc;
+ul {
+  list-style: none;
+  padding: 0;
 }
 
-/* ── POKEBALL BUTTON ── */
+ul li {
+  font-size: 12px;
+  padding: 3px 0;
+  border-bottom: 0.5px solid rgba(55, 133, 130, 0.2);
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-text);
+}
+
+ul li:last-child {
+  border-bottom: none;
+}
+
+/* ══════════════════════════════════════════
+   BOUTON VOIR PLUS
+   ══════════════════════════════════════════ */
+.btn-details {
+  margin-top: 8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2.5px solid var(--color-bg);
+  background-color: var(--color-gold);
+  cursor: pointer;
+  font-size: 0;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s;
+  flex-shrink: 0;
+}
+
+.btn-details:hover {
+  transform: rotate(20deg) scale(1.1);
+}
+
+/* ══════════════════════════════════════════
+   BOUTONS POKÉBALL (prev / next / search)
+   ══════════════════════════════════════════ */
 .pokeball-btn,
 #prev,
 #next {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  border: 2.5px solid #222;
+  border: 2.5px solid #333;
   background: linear-gradient(to bottom, #e74c3c 50%, #fff 50%);
   position: relative;
   cursor: pointer;
   padding: 0;
   overflow: hidden;
   flex-shrink: 0;
-  font-size: 0; /* cache le texte emoji */
+  font-size: 0;
   transition: transform 0.15s;
 }
+
 .pokeball-btn:hover,
 #prev:hover,
 #next:hover {
@@ -262,41 +393,35 @@ img {
   right: 0;
   top: calc(50% - 1.5px);
   height: 3px;
-  background: #222;
+  background: #333;
 }
+
 .pokeball-btn::after,
 #prev::after,
 #next::after {
   content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #222;
+  border: 2.5px solid #333;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+/* ══════════════════════════════════════════
+   PAGINATION
+   ══════════════════════════════════════════ */
 .button {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 12px;
-  padding: 0.5rem 0;
+  padding: 0.75rem 0;
 }
-#prev {
-  background-color: var(--color-text);
-  color: black;
-  margin-right: 9px;
-  padding: 0.2rem;
-}
-#next {
-  background-color: var(--color-border-card);
-  color: white;
-  margin-left: 9px;
-  padding: 0.2rem;
-}
+
 #page-number {
   font-size: 14px;
   font-weight: 700;
@@ -306,53 +431,91 @@ img {
   border-radius: 10px;
   border: 2px solid var(--color-gold);
 }
+
+/* ══════════════════════════════════════════
+   LOADING
+   ══════════════════════════════════════════ */
 #loading {
   grid-column: 1 / -1;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 12px;
   padding: 2rem;
-  width: 100%;
-  border-radius: 8px;
-  font-size: 14px;
+  font-size: 15px;
   color: var(--color-text-heading);
 }
-/** ── FOOTER ── */
+
+#loading img {
+  width: 90px;
+  border-radius: 8px;
+  padding: 0;
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+   ══════════════════════════════════════════ */
 footer h4 {
   text-align: center;
   border-top: 4px solid var(--color-border-card);
   padding: 1rem;
-  font-size: 10px;
+  font-size: 11px;
   font-style: oblique;
+  color: var(--color-text-muted);
 }
-/** __Adaptation téléphone___*/
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — TABLETTE
+   ══════════════════════════════════════════ */
+@media (max-width: 768px) {
+  #card-toilets {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #map {
+    height: 35vh;
+  }
+}
+
+/* ══════════════════════════════════════════
+   RESPONSIVE — TÉLÉPHONE
+   ══════════════════════════════════════════ */
 @media (max-width: 500px) {
   #card-toilets {
     grid-template-columns: 1fr;
-    margin: 0.5rem;
     padding: 0.5rem;
+  }
+
+  /* carte repasse en colonne sur mobile */
+  .card-toilet {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .card-left {
+    width: 100%;
+  }
+
+  .card-right {
+    width: 100%;
+    text-align: center;
+  }
+
+  .card-types-icons {
+    justify-content: center;
   }
 
   #search {
     width: 90%;
-    margin: 0.5rem auto;
-    display: block;
   }
 
-  img {
-    width: 50%;
-  }
-
-  .card-image {
-    width: 80%;
-  }
-
-  header {
-    padding: 0.5rem;
+  #map {
+    height: 25vh;
   }
 
   #logo {
-    width: 60%;
+    height: 70px;
   }
 }
