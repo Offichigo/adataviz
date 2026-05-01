@@ -31,7 +31,7 @@ const getTypes = (result) => {
  * @param {*} num result data gid en num cart pokemon
  */
 const getSprite = (types, num) => {
-  const card = document.querySelector(`#${num} .card-types-icons`);
+  const card = document.querySelector(`#wc-${num} .card-types-icons`);
   types.forEach((type) => {
     addSprite(type, card);
   });
@@ -104,7 +104,7 @@ export const createCards = (result) => {
 
   const cards = document.createElement("div");
   cards.classList.add("card-toilet");
-  cards.setAttribute("id", num);
+  cards.setAttribute("id", `wc-${num}`);
 
   const types = getTypes(result);
   const pmr = result.accessibilite_pmr === "oui" ? "♿" : "❌";
